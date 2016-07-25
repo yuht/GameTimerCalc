@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
-   ClientHeight    =   4215
+   ClientHeight    =   4155
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   6540
+   ClientWidth     =   6435
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -17,15 +17,15 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   4215
-   ScaleWidth      =   6540
+   ScaleHeight     =   4155
+   ScaleWidth      =   6435
    StartUpPosition =   3  '窗口缺省
    Begin VB.Frame Frame2 
       Caption         =   "刷怪时间"
       Height          =   4110
-      Left            =   45
+      Left            =   15
       TabIndex        =   4
-      Top             =   45
+      Top             =   15
       Width           =   3705
       Begin VB.Timer Timer1 
          Interval        =   1000
@@ -34,29 +34,28 @@ Begin VB.Form Form1
       End
       Begin VB.ListBox List2 
          Appearance      =   0  'Flat
-         Height          =   3345
-         Left            =   45
+         Height          =   3540
+         Left            =   75
          Sorted          =   -1  'True
          TabIndex        =   5
-         Top             =   540
-         Width           =   3570
+         Top             =   480
+         Width           =   3540
       End
       Begin VB.Label Label1 
-         AutoSize        =   -1  'True
          Caption         =   "当前时间："
          Height          =   195
-         Left            =   90
+         Left            =   120
          TabIndex        =   6
-         Top             =   270
-         Width           =   900
+         Top             =   225
+         Width           =   3510
       End
    End
    Begin VB.Frame Frame1 
       Caption         =   "怪物和刷新时间管理"
       Height          =   4110
-      Left            =   3825
+      Left            =   3735
       TabIndex        =   0
-      Top             =   45
+      Top             =   15
       Width           =   2670
       Begin VB.CommandButton Command3 
          Caption         =   "删除"
@@ -80,7 +79,7 @@ Begin VB.Form Form1
          Left            =   90
          Sorted          =   -1  'True
          TabIndex        =   1
-         Top             =   270
+         Top             =   280
          Width           =   1950
       End
    End
@@ -145,6 +144,10 @@ Public Function refList()
     
     SectionNames = GetSectionNames()
     SectionNames = Replace(SectionNames, vbNullChar & vbNullChar, "")
+    If Len(SectionNames) = 0 Then
+        Exit Function
+    End If
+    
     If InStrRev(SectionNames, vbNullChar) = Len(SectionNames) Then
         SectionNames = Left(SectionNames, Len(SectionNames) - 1)
     End If
@@ -180,13 +183,19 @@ Private Function TimeRef()
     
     Dim i As Integer
     Dim j As Integer
+    Dim k As Integer
     Dim seci As Integer
     Dim Dtj As String
     Dim Dtjold As String
     Dim DtNow As String
-    Dim subSec As Integer
+    Dim subSec
     
     List2.Clear
+    If List1.ListCount = 0 Then
+        Exit Function
+    End If
+    
+    
     
     j = UBound(JuanJuanRef)
     For i = 0 To j
@@ -213,8 +222,11 @@ Private Function TimeRef()
             Wend
             Call PutToInI(JuanJuanRef(i).name, "Dt", Dtjold)
         End If
+        For k = 0 To 3
+            List2.AddItem Format(DateAdd("s", k * seci, Dtj), "YYYY/MM/DD HH:MM:SS") & " - " & JuanJuanRef(i).name
+            DoEvents
+        Next
         
-        List2.AddItem Format(Dtj, "YYYY/MM/DD HH:MM:SS") & " - " & JuanJuanRef(i).name
         DoEvents
     Next
     
@@ -245,6 +257,25 @@ Private Sub List1_Click()
 End Sub
 
 Private Sub Timer1_Timer()
+    Dim Time1 As String
+    Dim Time2 As String
+    
     Label1.Caption = Format(Now, "YYYY/MM/DD HH:MM:SS") & " - 当前时间"
+    
+    If List2.ListCount <> 0 Then
+        Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, "-") - 1)
+        Time2 = Left$(List2.List(0), InStr(1, List2.List(0), "-") - 1)
+        
+        Time1 = Trim$(Time1)
+        Time2 = Trim$(Time2)
+        Debug.Print Time1
+'        Debug.Print "11,", List2.List(0)
+        Debug.Print Time2
+        If DateDiff("s", Time1, Time2) > 0 Then
+            Exit Sub
+        End If
+    End If
+        
     Call TimeRef
+
 End Sub

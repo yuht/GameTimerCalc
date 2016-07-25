@@ -1,4 +1,8 @@
 [History]
-1=#P0#=mb	#P1#=cmd2_Click	#P2#=时间计算器/Form1/cmd2_Click	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20160721085059	#P7#=0	#P8#=16	.
-2=#P0#=mb	#P1#=Form_Load	#P2#=时间计算器/Form1/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160721081326	#P7#=0	#P8#=1	.
-3=#P0#=mb	#P1#=cmd_Click	#P2#=时间计算器/Form1/cmd_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160721081040	#P7#=0	#P8#=4	.
+1=#P0#=mb	#P1#=Command3_Click	#P2#=刷怪时间计算器/Form1/Command3_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725093647	#P7#=0	#P8#=3	.
+2=#P0#=mb	#P1#=Command1_Click	#P2#=刷怪时间计算器/Form2/Command1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725093307	#P7#=0	#P8#=24	.
+3=#P0#=mb	#P1#=Command2_Click	#P2#=刷怪时间计算器/Form2/Command2_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725093305	#P7#=0	#P8#=0	.
+4=#P0#=mb	#P1#=TimeRef	#P2#=刷怪时间计算器/Form1/TimeRef	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20160725090917	#P7#=0	#P8#=0	.
+5=#P0#=mb	#P1#=refList	#P2#=刷怪时间计算器/Form1/refList	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20160725090730	#P7#=0	#P8#=3	.
+6=#P0#=mb	#P1#=Timer1_Timer	#P2#=刷怪时间计算器/Form1/Timer1_Timer	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725090217	#P7#=0	#P8#=12	.
+7=#P0#=mb	#P1#=List1_Click	#P2#=刷怪时间计算器/Form1/List1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725083340	#P7#=0	#P8#=12	.
