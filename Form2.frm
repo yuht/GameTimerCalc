@@ -18,7 +18,7 @@ Begin VB.Form Form2
       Appearance      =   0  'Flat
       Caption         =   "添加"
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -36,7 +36,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -54,7 +54,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -66,7 +66,7 @@ Begin VB.Form Form2
       Index           =   0
       Left            =   1080
       TabIndex        =   2
-      Text            =   "Text1"
+      Text            =   "0"
       Top             =   382
       Width           =   645
    End
@@ -74,7 +74,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -86,7 +86,7 @@ Begin VB.Form Form2
       Index           =   1
       Left            =   2160
       TabIndex        =   3
-      Text            =   "Text1"
+      Text            =   "0"
       Top             =   382
       Width           =   645
    End
@@ -94,7 +94,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -106,7 +106,7 @@ Begin VB.Form Form2
       Index           =   2
       Left            =   3105
       TabIndex        =   4
-      Text            =   "Text1"
+      Text            =   "0"
       Top             =   382
       Width           =   645
    End
@@ -114,7 +114,7 @@ Begin VB.Form Form2
       Appearance      =   0  'Flat
       Caption         =   "当前时间"
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -132,7 +132,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -144,6 +144,7 @@ Begin VB.Form Form2
       Index           =   3
       Left            =   1080
       TabIndex        =   5
+      Text            =   "0"
       Top             =   705
       Width           =   645
    End
@@ -151,7 +152,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -163,6 +164,7 @@ Begin VB.Form Form2
       Index           =   4
       Left            =   2160
       TabIndex        =   6
+      Text            =   "0"
       Top             =   705
       Width           =   645
    End
@@ -170,7 +172,7 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -191,7 +193,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "怪物名称："
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -211,7 +213,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "刷怪时间："
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -231,7 +233,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "："
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -251,7 +253,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "："
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -271,7 +273,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "刷新间隔："
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -291,7 +293,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "分"
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -311,7 +313,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "秒"
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -331,7 +333,7 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "小时"
       BeginProperty Font 
-         Name            =   "Verdana"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
