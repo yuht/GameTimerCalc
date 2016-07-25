@@ -1,10 +1,11 @@
 VERSION 5.00
 Begin VB.Form Form1 
+   BorderStyle     =   1  'Fixed Single
    Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
-   ClientHeight    =   5310
-   ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   6585
+   ClientHeight    =   5280
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   6510
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -17,8 +18,8 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   5310
-   ScaleWidth      =   6585
+   ScaleHeight     =   5280
+   ScaleWidth      =   6510
    StartUpPosition =   3  '窗口缺省
    Begin VB.Frame Frame2 
       Caption         =   "刷怪时间"
