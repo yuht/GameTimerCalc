@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
-   ClientHeight    =   4155
+   ClientHeight    =   5310
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   6435
+   ClientWidth     =   6585
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -17,43 +17,61 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   4155
-   ScaleWidth      =   6435
+   ScaleHeight     =   5310
+   ScaleWidth      =   6585
    StartUpPosition =   3  '窗口缺省
    Begin VB.Frame Frame2 
       Caption         =   "刷怪时间"
-      Height          =   4110
-      Left            =   15
+      Height          =   5235
+      Left            =   45
       TabIndex        =   4
       Top             =   15
       Width           =   3705
+      Begin VB.TextBox Text1 
+         Alignment       =   2  'Center
+         Appearance      =   0  'Flat
+         Height          =   285
+         Left            =   1980
+         TabIndex        =   8
+         Text            =   "0"
+         Top             =   225
+         Width           =   555
+      End
       Begin VB.Timer Timer1 
          Interval        =   1000
-         Left            =   3150
-         Top             =   225
+         Left            =   3105
+         Top             =   90
       End
       Begin VB.ListBox List2 
          Appearance      =   0  'Flat
-         Height          =   3540
+         Height          =   4320
          Left            =   75
          Sorted          =   -1  'True
          TabIndex        =   5
-         Top             =   480
+         Top             =   840
          Width           =   3540
+      End
+      Begin VB.Label Label2 
+         Caption         =   "延迟清理过期事件时间：           分钟"
+         Height          =   195
+         Left            =   90
+         TabIndex        =   7
+         Top             =   270
+         Width           =   3555
       End
       Begin VB.Label Label1 
          Caption         =   "当前时间："
          Height          =   195
-         Left            =   120
+         Left            =   90
          TabIndex        =   6
-         Top             =   225
+         Top             =   540
          Width           =   3510
       End
    End
    Begin VB.Frame Frame1 
       Caption         =   "怪物和刷新时间管理"
-      Height          =   4110
-      Left            =   3735
+      Height          =   5235
+      Left            =   3780
       TabIndex        =   0
       Top             =   15
       Width           =   2670
@@ -75,11 +93,11 @@ Begin VB.Form Form1
       End
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
-         Height          =   3735
+         Height          =   4905
          Left            =   90
          Sorted          =   -1  'True
          TabIndex        =   1
-         Top             =   280
+         Top             =   260
          Width           =   1950
       End
    End
@@ -97,8 +115,11 @@ Private Type typeJuanJuanRef
     refDt As String
     
 End Type
+
 Dim JuanJuanRef() As typeJuanJuanRef
-     
+
+Dim oldInt As Integer
+
 Private Sub Command1_Click()
     Form2.Left = Me.Left + Me.Width + 200
     Form2.Top = Me.Top
@@ -106,11 +127,6 @@ Private Sub Command1_Click()
     Form2.Show
 End Sub
 
- 
-
- 
-
- 
 
 Private Sub Command3_Click()
     If List1.SelCount Then
@@ -126,9 +142,17 @@ Private Sub Command3_Click()
 End Sub
 
 Private Sub Form_Load()
+    Dim DCTT As String
     List1.Clear
     List2.Clear
     Call refList
+    DCTT = GetFromInI("Setting", "DelayClearTimeoutThings")
+    If Len(DCTT) = 0 Or Not IsNumeric(DCTT) Then
+        Text1 = 0
+    Else
+        Text1 = DCTT
+    End If
+    oldInt = Text1
 End Sub
 
 
@@ -143,7 +167,10 @@ Public Function refList()
     List1.Clear
     
     SectionNames = GetSectionNames()
+    SectionNames = Replace(SectionNames, "Setting", "")
     SectionNames = Replace(SectionNames, vbNullChar & vbNullChar, "")
+    
+     
     If Len(SectionNames) = 0 Then
         Exit Function
     End If
@@ -238,6 +265,8 @@ Private Sub Form_Unload(Cancel As Integer)
     End
 End Sub
 
+ 
+
 Private Sub List1_Click()
     Form2.txtText_name = List1.List(List1.ListIndex)
     Form2.txtText2(0) = Hour(GetFromInI(Form2.txtText_name, "Dt"))
@@ -256,6 +285,21 @@ Private Sub List1_Click()
     End If
 End Sub
 
+Private Sub Text1_Change()
+    
+    If Not IsNumeric(Text1) Then
+        Text1 = oldInt
+    Else
+        If Text1 > 30 Or Text1 < 0 Then
+            MsgBox "你咋不飞呢?" & vbCrLf & "最多30分钟，最少0分钟", vbCritical + vbOKOnly
+            Text1 = IIf(Text1 > 30, 30, 0)
+        End If
+        oldInt = Text1
+        Call PutToInI("Setting", "DelayClearTimeoutThings", Text1)
+    End If
+    
+End Sub
+
 Private Sub Timer1_Timer()
     Dim Time1 As String
     Dim Time2 As String
@@ -265,6 +309,10 @@ Private Sub Timer1_Timer()
     If List2.ListCount <> 0 Then
         Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, "-") - 1)
         Time2 = Left$(List2.List(0), InStr(1, List2.List(0), "-") - 1)
+        
+        '延迟清理过期事件时间
+        Time2 = DateAdd("s", Text1 * 60, Time2)
+        
         
         Time1 = Trim$(Time1)
         Time2 = Trim$(Time2)
