@@ -55,6 +55,7 @@ Begin VB.Form Form1
          Width           =   3540
       End
       Begin VB.Label Label2 
+         BackStyle       =   0  'Transparent
          Caption         =   "延迟清理过期事件时间：           分钟"
          Height          =   195
          Left            =   90
@@ -63,6 +64,7 @@ Begin VB.Form Form1
          Width           =   3555
       End
       Begin VB.Label Label1 
+         BackStyle       =   0  'Transparent
          Caption         =   "当前时间："
          Height          =   195
          Left            =   90
@@ -172,7 +174,7 @@ Public Function refList()
     List1.Clear
     
     SectionNames = GetSectionNames()
-    SectionNames = Replace(SectionNames, "Setting", "")
+    SectionNames = Replace(SectionNames, "Setting" & vbNullChar, "")
     SectionNames = Replace(SectionNames, vbNullChar & vbNullChar, "")
     
      
@@ -315,23 +317,23 @@ Private Sub Timer1_Timer()
     
     If List2.ListCount <> 0 Then
         '当前时间
-        Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, "-") - 1)
+        Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, " - ") - 1)
         '刷新时间
-        Time2 = Left$(List2.List(0), InStr(1, List2.List(0), "-") - 1)
+        Time2 = Left$(List2.List(0), InStr(1, List2.List(0), " - ") - 1)
         Time2_org = Time2
         '延迟清理过期事件时间
         Time2 = DateAdd("s", Text1 * 60, Time2)
         
         
-        Time1 = Trim$(Time1)
-        Time2 = Trim$(Time2)
+        Time1 = Format(Trim$(Time1), "YYYY/MM/DD HH:MM:SS")
+        Time2 = Format(Trim$(Time2), "YYYY/MM/DD HH:MM:SS")
         Debug.Print Time1
 '        Debug.Print "11,", List2.List(0)
         Debug.Print Time2
         
         For i = 0 To List2.ListCount - 1
-            Time2_org = Left$(List2.List(i), InStr(1, List2.List(i), "-") - 1)
-            If DateDiff("s", Time2_org, Time1) > 0 Then
+            Time2_org = Left$(List2.List(i), InStr(1, List2.List(i), " - ") - 1)
+            If DateDiff("s", Time2_org, Time1) >= 0 Then
                 If InStr(List2.List(i), "√") = 0 Then
                     List2.List(i) = Replace(List2.List(i), "-    ", "- √")
                 End If
@@ -340,7 +342,7 @@ Private Sub Timer1_Timer()
             End If
         Next
         
-        If DateDiff("s", Time1, Time2) > 0 Then
+        If DateDiff("s", Time1, Time2) >= 0 Then
             Exit Sub
         End If
     End If

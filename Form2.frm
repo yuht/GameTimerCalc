@@ -376,6 +376,7 @@ Private Sub Command1_Click()
     Next
     
     Dt = Date & " " & TimeSerial(txtText2(0), txtText2(1), txtText2(2))
+    Dt = Format(Dt, "YYYY/MM/DD HH:MM:SS")
     refDt = TimeSerial(txtText2(3), txtText2(4), txtText2(5))
     
 '    MsgBox txtText_name & vbCrLf & Date & " " & Dt & vbCrLf & refDt
