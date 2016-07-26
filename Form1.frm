@@ -46,7 +46,9 @@ Begin VB.Form Form1
       Begin VB.ListBox List2 
          Appearance      =   0  'Flat
          Height          =   4320
+         ItemData        =   "Form1.frx":030A
          Left            =   75
+         List            =   "Form1.frx":030C
          Sorted          =   -1  'True
          TabIndex        =   5
          Top             =   840
@@ -154,6 +156,8 @@ Private Sub Form_Load()
         Text1 = DCTT
     End If
     oldInt = Text1
+    
+    Me.Caption = Me.Caption & "  Ver:" & App.Major & "." & App.Minor & "." & App.Revision
 End Sub
 
 
@@ -242,7 +246,7 @@ Private Function TimeRef()
             
             Dtjold = Dtj
             subSec = DateDiff("s", Dtj, Now)
-            While subSec > 0
+            While subSec - Text1 * 60 > 0
                 Dtjold = Dtj
                 Dtj = DateAdd("s", seci, Dtj)
                 subSec = DateDiff("s", Dtj, Now)
@@ -251,7 +255,7 @@ Private Function TimeRef()
             Call PutToInI(JuanJuanRef(i).name, "Dt", Dtjold)
         End If
         For k = 0 To 3
-            List2.AddItem Format(DateAdd("s", k * seci, Dtj), "YYYY/MM/DD HH:MM:SS") & " - " & JuanJuanRef(i).name
+            List2.AddItem Format(DateAdd("s", k * seci, Dtj), "YYYY/MM/DD HH:MM:SS") & " -    " & JuanJuanRef(i).name
             DoEvents
         Next
         
@@ -304,13 +308,17 @@ End Sub
 Private Sub Timer1_Timer()
     Dim Time1 As String
     Dim Time2 As String
+    Dim Time2_org As String
+    Dim i As Integer
     
     Label1.Caption = Format(Now, "YYYY/MM/DD HH:MM:SS") & " - 当前时间"
     
     If List2.ListCount <> 0 Then
+        '当前时间
         Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, "-") - 1)
+        '刷新时间
         Time2 = Left$(List2.List(0), InStr(1, List2.List(0), "-") - 1)
-        
+        Time2_org = Time2
         '延迟清理过期事件时间
         Time2 = DateAdd("s", Text1 * 60, Time2)
         
@@ -320,6 +328,18 @@ Private Sub Timer1_Timer()
         Debug.Print Time1
 '        Debug.Print "11,", List2.List(0)
         Debug.Print Time2
+        
+        For i = 0 To List2.ListCount - 1
+            Time2_org = Left$(List2.List(i), InStr(1, List2.List(i), "-") - 1)
+            If DateDiff("s", Time2_org, Time1) > 0 Then
+                If InStr(List2.List(i), "√") = 0 Then
+                    List2.List(i) = Replace(List2.List(i), "-    ", "- √")
+                End If
+            Else
+                Exit For
+            End If
+        Next
+        
         If DateDiff("s", Time1, Time2) > 0 Then
             Exit Sub
         End If
