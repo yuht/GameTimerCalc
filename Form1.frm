@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
+   Caption         =   "刷怪时间提示  by滴滴地滴滴 BiuBiu"
    ClientHeight    =   5280
    ClientLeft      =   45
    ClientTop       =   375
@@ -124,6 +124,7 @@ End Type
 Dim JuanJuanRef() As typeJuanJuanRef
 
 Dim oldInt As Integer
+Dim RefNow As Boolean
 
 Private Sub Command1_Click()
     Form2.Left = Me.Left + Me.Width + 200
@@ -144,6 +145,7 @@ Private Sub Command3_Click()
         Unload Form2
     End If
     Call refList
+    Call TimeRef
 End Sub
 
 Private Sub Form_Load()
@@ -159,7 +161,9 @@ Private Sub Form_Load()
     End If
     oldInt = Text1
     
-    Me.Caption = Me.Caption & "  Ver:" & App.Major & "." & App.Minor & "." & App.Revision
+    Me.Caption = Me.Caption & " Ver:" & App.Major & "." & App.Minor & "." & App.Revision
+    Call TimeRef
+    Call Timer1_Timer
 End Sub
 
 
@@ -213,7 +217,7 @@ Public Function refList()
     
 End Function
 
-Private Function TimeRef()
+Public Function TimeRef()
     
     Dim i As Integer
     Dim j As Integer
@@ -248,7 +252,9 @@ Private Function TimeRef()
             
             Dtjold = Dtj
             subSec = DateDiff("s", Dtj, Now)
-            While subSec - Text1 * 60 > 0
+             
+            
+            While (subSec - (Text1 * 60) > 0)
                 Dtjold = Dtj
                 Dtj = DateAdd("s", seci, Dtj)
                 subSec = DateDiff("s", Dtj, Now)
@@ -293,19 +299,42 @@ Private Sub List1_Click()
 End Sub
 
 Private Sub Text1_Change()
+    Dim shortestSEC
+    shortestSEC = GetShortestSeconds()
     
     If Not IsNumeric(Text1) Then
         Text1 = oldInt
     Else
-        If Text1 > 30 Or Text1 < 0 Then
-            MsgBox "你咋不飞呢?" & vbCrLf & "最多30分钟，最少0分钟", vbCritical + vbOKOnly
-            Text1 = IIf(Text1 > 30, 30, 0)
+        If Text1 > shortestSEC Or Text1 < 0 Then
+            MsgBox "你咋不飞呢?" & vbCrLf & "最多" & shortestSEC & "分钟，最少0分钟", vbCritical + vbOKOnly
+            Text1 = IIf(Text1 >= shortestSEC, shortestSEC, 0)
         End If
         oldInt = Text1
         Call PutToInI("Setting", "DelayClearTimeoutThings", Text1)
     End If
     
 End Sub
+
+
+Private Function GetShortestSeconds()
+    Dim i As Integer
+    Dim shortestSEC
+    Dim dtSec
+    shortestSEC = 2000
+    dtSec = 0
+    
+    
+    If Not List1.ListCount = 0 Then
+        For i = 0 To UBound(JuanJuanRef)
+            dtSec = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
+            If shortestSEC > dtSec Then
+                shortestSEC = dtSec
+            End If
+        Next
+    End If
+    
+    GetShortestSeconds = Format(shortestSEC / 60, "0.00")
+End Function
 
 Private Sub Timer1_Timer()
     Dim Time1 As String
@@ -317,15 +346,13 @@ Private Sub Timer1_Timer()
     
     If List2.ListCount <> 0 Then
         '当前时间
-        Time1 = Left$(Label1.Caption, InStr(1, Label1.Caption, " - ") - 1)
+        Time1 = Format(Now, "YYYY/MM/DD HH:MM:SS")
         '刷新时间
         Time2 = Left$(List2.List(0), InStr(1, List2.List(0), " - ") - 1)
         Time2_org = Time2
         '延迟清理过期事件时间
         Time2 = DateAdd("s", Text1 * 60, Time2)
-        
-        
-        Time1 = Format(Trim$(Time1), "YYYY/MM/DD HH:MM:SS")
+         
         Time2 = Format(Trim$(Time2), "YYYY/MM/DD HH:MM:SS")
         Debug.Print Time1
 '        Debug.Print "11,", List2.List(0)
@@ -333,7 +360,7 @@ Private Sub Timer1_Timer()
         
         For i = 0 To List2.ListCount - 1
             Time2_org = Left$(List2.List(i), InStr(1, List2.List(i), " - ") - 1)
-            If DateDiff("s", Time2_org, Time1) >= 0 Then
+            If DateDiff("s", Time2_org, Time1) > 0 Then
                 If InStr(List2.List(i), "√") = 0 Then
                     List2.List(i) = Replace(List2.List(i), "-    ", "- √")
                 End If
@@ -346,7 +373,14 @@ Private Sub Timer1_Timer()
             Exit Sub
         End If
     End If
-        
+    
+'    If RefNow = True Then
+'        RefNow = False
+'        Exit Sub
+'    End If
+    
     Call TimeRef
-
+    
+'    RefNow = True
+'    Call Timer1_Timer
 End Sub
