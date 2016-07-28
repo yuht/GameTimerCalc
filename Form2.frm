@@ -385,7 +385,7 @@ Private Sub Command1_Click()
     Call PutToInI(txtText_name, "refDt", refDt)
     
     Call Form1.refList
-    
+    Call Form1.TimeRef
     
 End Sub
 
