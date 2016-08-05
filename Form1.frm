@@ -241,7 +241,7 @@ Public Function TimeRef()
         seci = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
         
         '获取当前时间
-        DtNow = Format(Now, "YYYY/MM/DD HH:MM:SS")
+        DtNow = TimeForamt(Now)
         
         '上次刷新时间
         Dtj = JuanJuanRef(i).Dt
@@ -263,7 +263,7 @@ Public Function TimeRef()
             Call PutToInI(JuanJuanRef(i).name, "Dt", Dtjold)
         End If
         For k = 0 To 3
-            List2.AddItem Format(DateAdd("s", k * seci, Dtj), "YYYY/MM/DD HH:MM:SS") & " -    " & JuanJuanRef(i).name
+            List2.AddItem TimeForamt(DateAdd("s", k * seci, Dtj)) & " -    " & JuanJuanRef(i).name
             DoEvents
         Next
         
@@ -342,18 +342,18 @@ Private Sub Timer1_Timer()
     Dim Time2_org As String
     Dim i As Integer
     
-    Label1.Caption = Format(Now, "YYYY/MM/DD HH:MM:SS") & " - 当前时间"
+    Label1.Caption = TimeForamt(Now) & " - 当前时间"
     
     If List2.ListCount <> 0 Then
         '当前时间
-        Time1 = Format(Now, "YYYY/MM/DD HH:MM:SS")
+        Time1 = TimeForamt(Now)
         '刷新时间
         Time2 = Left$(List2.List(0), InStr(1, List2.List(0), " - ") - 1)
         Time2_org = Time2
         '延迟清理过期事件时间
         Time2 = DateAdd("s", Text1 * 60, Time2)
          
-        Time2 = Format(Trim$(Time2), "YYYY/MM/DD HH:MM:SS")
+        Time2 = TimeForamt(Trim$(Time2))
         Debug.Print Time1
 '        Debug.Print "11,", List2.List(0)
         Debug.Print Time2
@@ -384,3 +384,8 @@ Private Sub Timer1_Timer()
 '    RefNow = True
 '    Call Timer1_Timer
 End Sub
+
+
+Function TimeForamt(Time As String) As String
+    timeformat = Format(Trim$(Time), "YYYY/MM/DD HH:MM:SS")
+End Function
