@@ -238,7 +238,7 @@ Public Function TimeRef()
     j = UBound(JuanJuanRef)
     For i = 0 To j
         '把刷新间隔时间转成秒
-        seci = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
+        seci = TimeGetSeconds(JuanJuanRef(i).refDt)
         
         '获取当前时间
         DtNow = TimeForamt(Now)
@@ -326,7 +326,7 @@ Private Function GetShortestSeconds()
     
     If Not List1.ListCount = 0 Then
         For i = 0 To UBound(JuanJuanRef)
-            dtSec = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
+            dtSec = TimeGetSeconds(JuanJuanRef(i).refDt)
             If shortestSEC > dtSec Then
                 shortestSEC = dtSec
             End If
@@ -386,6 +386,10 @@ Private Sub Timer1_Timer()
 End Sub
 
 
-Function TimeForamt(Time As String) As String
-    timeformat = Format(Trim$(Time), "YYYY/MM/DD HH:MM:SS")
+Function TimeForamt(time As String) As String
+    timeformat = Format(Trim$(time), "YYYY/MM/DD HH:MM:SS")
+End Function
+
+Function TimeGetSeconds(time As String) As Integer
+    TimeGetSeconds = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & time)
 End Function
