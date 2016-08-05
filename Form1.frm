@@ -360,7 +360,7 @@ Private Sub Timer1_Timer()
         '延迟清理过期事件时间
         Time2 = DateAdd("s", Text1 * 60, Time2)
          
-        Time2 = TimeForamt(Trim$(Time2))
+        Time2 = TimeForamt(Time2)
         Debug.Print Time1
 '        Debug.Print "11,", List2.List(0)
         Debug.Print Time2
