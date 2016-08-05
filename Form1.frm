@@ -115,11 +115,18 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type typeJuanJuanRef
-    name As String
+    Name As String
     Dt As String
     refDt As String
     
 End Type
+
+Private Type typeListDetial
+    Name As String
+    NextDispTime As String
+    DispFlag As Boolean
+End Type
+
 
 Dim JuanJuanRef() As typeJuanJuanRef
 
@@ -208,9 +215,9 @@ Public Function refList()
     ReDim JuanJuanRef(UbndASN)
     For i = 0 To UbndASN
         List1.AddItem ArraySectionNames(i)
-        JuanJuanRef(i).name = ArraySectionNames(i)
-        JuanJuanRef(i).Dt = GetFromInI(JuanJuanRef(i).name, "Dt")
-        JuanJuanRef(i).refDt = GetFromInI(JuanJuanRef(i).name, "refDt")
+        JuanJuanRef(i).Name = ArraySectionNames(i)
+        JuanJuanRef(i).Dt = GetFromInI(JuanJuanRef(i).Name, "Dt")
+        JuanJuanRef(i).refDt = GetFromInI(JuanJuanRef(i).Name, "refDt")
     Next
     
     
@@ -260,10 +267,10 @@ Public Function TimeRef()
                 subSec = DateDiff("s", Dtj, Now)
                 DoEvents
             Wend
-            Call PutToInI(JuanJuanRef(i).name, "Dt", Dtjold)
+            Call PutToInI(JuanJuanRef(i).Name, "Dt", Dtjold)
         End If
         For k = 0 To 3
-            List2.AddItem TimeForamt(DateAdd("s", k * seci, Dtj)) & " -    " & JuanJuanRef(i).name
+            List2.AddItem TimeForamt(DateAdd("s", k * seci, Dtj)) & " -    " & JuanJuanRef(i).Name
             DoEvents
         Next
         
