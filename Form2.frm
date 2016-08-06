@@ -380,7 +380,7 @@ Private Sub Command1_Click()
     refDt = TimeSerial(txtText2(3), txtText2(4), txtText2(5))
     
 '    MsgBox txtText_name & vbCrLf & Date & " " & Dt & vbCrLf & refDt
-    
+    Call DelIniSec(Form1.List1.List(Form1.List1.ListIndex))
     Call PutToInI(txtText_name, "Dt", Dt)
     Call PutToInI(txtText_name, "refDt", refDt)
     
