@@ -190,13 +190,10 @@ Public Function refList()
         Exit Function
     End If
     
-    
-    
-    UbndASN = UbndASN
-    
     ReDim ListDetials(UbndASN, 3)
     
     ReDim JuanJuanRef(UbndASN)
+    
     For i = 0 To UbndASN
         List1.AddItem ArraySectionNames(i)
         JuanJuanRef(i).Name = ArraySectionNames(i)
@@ -208,10 +205,7 @@ Public Function refList()
         Next
     
     Next
-    
-    
-    
-    
+            
     Timer1.Enabled = True
     
 End Function
@@ -222,8 +216,12 @@ Public Function TimeRef()
     Dim j As Integer
     Dim k As Integer
     Dim seci As Integer
+    
+    Dim SecDtj
+    Dim SecNow
+    Dim IntSecNowDivDtj
+    
     Dim Dtj As String
-    Dim subSec
     
     
     
@@ -232,26 +230,24 @@ Public Function TimeRef()
         Exit Function
     End If
     
-    
+    Timer1.Enabled = False
     
     j = UBound(JuanJuanRef)
     For i = 0 To j
         '把刷新间隔时间转成秒
         seci = TimeGetSeconds(JuanJuanRef(i).refDt)
-         
-        
         '上次刷新时间
         Dtj = JuanJuanRef(i).Dt
         
         '刷新时间不为零
         If seci > 0 Then
-            '获取时间差
-            Do
-                Dtj = DateAdd("s", seci, Dtj)
-                subSec = DateDiff("s", Dtj, Now)
-                DoEvents
-            Loop While (subSec > 0)
-            Dtj = DateAdd("s", -1 * seci, Dtj)
+'            '获取时间差
+            SecDtj = TimeGetUTCSeconds(JuanJuanRef(i).Dt)
+            SecNow = TimeGetUTCSeconds(Now)
+            
+            IntSecNowDivDtj = Fix((SecNow - SecDtj) / seci)
+            
+            Dtj = DateAdd("s", IntSecNowDivDtj * seci, Dtj)
             Call PutToInI(JuanJuanRef(i).Name, "Dt", Dtj)
         End If
         For k = 0 To UBound(ListDetials, 2)
@@ -263,6 +259,8 @@ Public Function TimeRef()
         ListDetials(i, 0).DispFlag = True
         DoEvents
     Next
+    
+    Timer1.Enabled = True
      
 End Function
 
@@ -363,6 +361,9 @@ Function refListDetials()
     Next
 End Function
 
+Function TimeGetUTCSeconds(time As String)
+    TimeGetUTCSeconds = DateDiff("s", "1970/01/01 00:00:00", time)
+End Function
 
 Function TimeFormat(time As String) As String
     TimeFormat = Format(Trim$(time), "YYYY/MM/DD HH:MM:SS")
