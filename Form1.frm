@@ -214,8 +214,8 @@ Public Function TimeRef()
     
     Dim i As Integer
     Dim j As Integer
-    Dim k As Integer
-    Dim seci As Integer
+    Dim k
+    Dim seci
     
     Dim SecDtj
     Dim SecNow
