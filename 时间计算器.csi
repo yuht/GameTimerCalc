@@ -1,10 +1,9 @@
 [History]
-1=#P0#=mb	#P1#=Text1_Change	#P2#=刷怪时间计算器/Form1/Text1_Change	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726153547	#P7#=0	#P8#=0	.
-2=#P0#=mb	#P1#=Command1_Click	#P2#=刷怪时间计算器/Form1/Command1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726153028	#P7#=0	#P8#=5	.
-3=#P0#=mb	#P1#=refList	#P2#=刷怪时间计算器/Form1/refList	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20160726154204	#P7#=0	#P8#=44	.
-4=#P0#=mb	#P1#=Form_Load	#P2#=刷怪时间计算器/Form1/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726134118	#P7#=0	#P8#=11	.
-5=#P0#=mb	#P1#=TimeRef	#P2#=刷怪时间计算器/Form1/TimeRef	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20160726154222	#P7#=0	#P8#=49	.
-6=#P0#=mb	#P1#=Timer1_Timer	#P2#=刷怪时间计算器/Form1/Timer1_Timer	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726154431	#P7#=0	#P8#=21	.
+1=#P0#=mb	#P1#=refList	#P2#=刷怪时间计算器/Form1/refList	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20170603084213	#P7#=0	#P8#=38	.
+2=#P0#=mb	#P1#=TimeRef	#P2#=刷怪时间计算器/Form1/TimeRef	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20170603084101	#P7#=0	#P8#=7	.
+3=#P0#=mb	#P1#=Command1_Click	#P2#=刷怪时间计算器/Form2/Command1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20170603082402	#P7#=0	#P8#=13	.
+4=#P0#=mb	#P1#=Timer1_Timer	#P2#=刷怪时间计算器/Form1/Timer1_Timer	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726154431	#P7#=0	#P8#=21	.
+5=#P0#=mb	#P1#=Command1_Click	#P2#=刷怪时间计算器/Form1/Command1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726153028	#P7#=0	#P8#=5	.
+6=#P0#=mb	#P1#=Form_Load	#P2#=刷怪时间计算器/Form1/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726134118	#P7#=0	#P8#=11	.
 7=#P0#=mb	#P1#=Command3_Click	#P2#=刷怪时间计算器/Form1/Command3_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725093647	#P7#=0	#P8#=6	.
-8=#P0#=mb	#P1#=Command1_Click	#P2#=刷怪时间计算器/Form2/Command1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160726154321	#P7#=0	#P8#=14	.
-9=#P0#=mb	#P1#=List1_Click	#P2#=刷怪时间计算器/Form1/List1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725083340	#P7#=0	#P8#=15	.
+8=#P0#=mb	#P1#=List1_Click	#P2#=刷怪时间计算器/Form1/List1_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20160725083340	#P7#=0	#P8#=15	.

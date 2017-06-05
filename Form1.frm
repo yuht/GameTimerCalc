@@ -197,8 +197,20 @@ Public Function refList()
     For i = 0 To UbndASN
         List1.AddItem ArraySectionNames(i)
         JuanJuanRef(i).Name = ArraySectionNames(i)
+        
         JuanJuanRef(i).Dt = GetFromInI(JuanJuanRef(i).Name, "Dt")
+        If JuanJuanRef(i).Dt = "" Then
+            JuanJuanRef(i).Dt = Format(Now, "YYYY/MM/DD HH:MM:SS")
+            Call PutToInI(JuanJuanRef(i).Name, "Dt", JuanJuanRef(i).Dt)
+        End If
+
+        
         JuanJuanRef(i).refDt = GetFromInI(JuanJuanRef(i).Name, "refDt")
+        If JuanJuanRef(i).refDt = "" Then
+            JuanJuanRef(i).refDt = TimeSerial(Hour(Now), Minute(Now), Second(Now))
+            Call PutToInI(JuanJuanRef(i).Name, "refDt", JuanJuanRef(i).refDt)
+        End If
+    
     
         For j = 0 To UBound(ListDetials, 2)
             ListDetials(i, j).Name = JuanJuanRef(i).Name
@@ -212,10 +224,10 @@ End Function
 
 Public Function TimeRef()
     
-    Dim i As Integer
-    Dim j As Integer
-    Dim k As Integer
-    Dim seci As Integer
+    Dim i As Double
+    Dim j As Double
+    Dim k As Double
+    Dim seci As Double
     
     Dim SecDtj
     Dim SecNow
