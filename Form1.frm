@@ -224,10 +224,17 @@ End Function
 
 Public Function TimeRef()
     
+<<<<<<< HEAD
     Dim i As Double
     Dim j As Double
     Dim k As Double
     Dim seci As Double
+=======
+    Dim i As Integer
+    Dim j As Integer
+    Dim k
+    Dim seci
+>>>>>>> origin/master
     
     Dim SecDtj
     Dim SecNow
