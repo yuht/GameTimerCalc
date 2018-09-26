@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form Form1 
+<<<<<<< HEAD
    Appearance      =   0  'Flat
    BackColor       =   &H80000005&
    Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
@@ -7,6 +8,14 @@ Begin VB.Form Form1
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   6540
+=======
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "刷怪时间提示  by滴滴地滴滴 BiuBiu"
+   ClientHeight    =   5280
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   6510
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -19,49 +28,55 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   4215
-   ScaleWidth      =   6540
+   ScaleHeight     =   5280
+   ScaleWidth      =   6510
    StartUpPosition =   3  '窗口缺省
    Begin VB.Frame Frame2 
       BackColor       =   &H80000005&
       Caption         =   "刷怪时间"
-      Height          =   4110
+      Height          =   5235
       Left            =   45
       TabIndex        =   4
-      Top             =   45
+      Top             =   15
       Width           =   3705
       Begin VB.Timer Timer1 
          Interval        =   1000
-         Left            =   3150
-         Top             =   225
+         Left            =   3105
+         Top             =   90
       End
       Begin VB.ListBox List2 
          Appearance      =   0  'Flat
-         Height          =   3345
-         Left            =   45
+         Height          =   4515
+         ItemData        =   "Form1.frx":030A
+         Left            =   90
+         List            =   "Form1.frx":030C
          Sorted          =   -1  'True
          TabIndex        =   5
-         Top             =   540
-         Width           =   3570
+         Top             =   630
+         Width           =   3540
       End
       Begin VB.Label Label1 
+<<<<<<< HEAD
          AutoSize        =   -1  'True
          BackColor       =   &H80000005&
+=======
+         BackStyle       =   0  'Transparent
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
          Caption         =   "当前时间："
          Height          =   195
-         Left            =   90
+         Left            =   135
          TabIndex        =   6
-         Top             =   270
-         Width           =   900
+         Top             =   315
+         Width           =   3510
       End
    End
    Begin VB.Frame Frame1 
       BackColor       =   &H80000005&
       Caption         =   "怪物和刷新时间管理"
-      Height          =   4110
-      Left            =   3825
+      Height          =   5235
+      Left            =   3780
       TabIndex        =   0
-      Top             =   45
+      Top             =   15
       Width           =   2670
       Begin VB.CommandButton Command3 
          Appearance      =   0  'Flat
@@ -87,11 +102,11 @@ Begin VB.Form Form1
       End
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
-         Height          =   3735
+         Height          =   4905
          Left            =   90
          Sorted          =   -1  'True
          TabIndex        =   1
-         Top             =   270
+         Top             =   260
          Width           =   1950
       End
    End
@@ -104,13 +119,27 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type typeJuanJuanRef
-    name As String
+    Name As String
     Dt As String
     refDt As String
     
 End Type
+
+Private Type typeListDetial
+    Name As String
+    NextDispTime As String
+    DispFlag As Boolean
+End Type
+
+
 Dim JuanJuanRef() As typeJuanJuanRef
-     
+Dim ListDetials() As typeListDetial
+
+Dim oldInt As Integer
+Dim RefNow As Boolean
+
+Dim NeedRefreshList2 As Boolean
+
 Private Sub Command1_Click()
     Form2.Left = Me.Left + Me.Width + 200
     Form2.Top = Me.Top
@@ -118,11 +147,6 @@ Private Sub Command1_Click()
     Form2.Show
 End Sub
 
- 
-
- 
-
- 
 
 Private Sub Command3_Click()
     If List1.SelCount Then
@@ -135,12 +159,22 @@ Private Sub Command3_Click()
         Unload Form2
     End If
     Call refList
+    Call TimeRef
 End Sub
 
 Private Sub Form_Load()
+    Dim DCTT As String
     List1.Clear
     List2.Clear
+    
     Call refList
+    
+    NeedRefreshList2 = False
+     
+    
+    Me.Caption = Me.Caption & "   Ver:" & App.Major & "." & App.Minor & "." & App.Revision
+    Call TimeRef
+    Call Timer1_Timer
 End Sub
 
 
@@ -148,6 +182,7 @@ End Sub
 Public Function refList()
     
     Dim i As Integer
+    Dim j As Integer
     Dim SectionNames As String
     Dim ArraySectionNames() As String
     Dim UbndASN As Integer
@@ -155,7 +190,14 @@ Public Function refList()
     List1.Clear
     
     SectionNames = GetSectionNames()
+    SectionNames = Replace(SectionNames, "Setting" & vbNullChar, "")
     SectionNames = Replace(SectionNames, vbNullChar & vbNullChar, "")
+    
+     
+    If Len(SectionNames) = 0 Then
+        Exit Function
+    End If
+    
     If InStrRev(SectionNames, vbNullChar) = Len(SectionNames) Then
         SectionNames = Left(SectionNames, Len(SectionNames) - 1)
     End If
@@ -171,64 +213,100 @@ Public Function refList()
         Exit Function
     End If
     
-    Timer1.Enabled = True
-    
-    UbndASN = UbndASN
+    ReDim ListDetials(UbndASN, 3)
     
     ReDim JuanJuanRef(UbndASN)
+    
     For i = 0 To UbndASN
         List1.AddItem ArraySectionNames(i)
-        JuanJuanRef(i).name = ArraySectionNames(i)
-        JuanJuanRef(i).Dt = GetFromInI(JuanJuanRef(i).name, "Dt")
-        JuanJuanRef(i).refDt = GetFromInI(JuanJuanRef(i).name, "refDt")
+        JuanJuanRef(i).Name = ArraySectionNames(i)
+        
+        JuanJuanRef(i).Dt = GetFromInI(JuanJuanRef(i).Name, "Dt")
+        If JuanJuanRef(i).Dt = "" Then
+            JuanJuanRef(i).Dt = Format(Now, "YYYY/MM/DD HH:MM:SS")
+            Call PutToInI(JuanJuanRef(i).Name, "Dt", JuanJuanRef(i).Dt)
+        End If
+
+        
+        JuanJuanRef(i).refDt = GetFromInI(JuanJuanRef(i).Name, "refDt")
+        If JuanJuanRef(i).refDt = "" Then
+            JuanJuanRef(i).refDt = TimeSerial(Hour(Now), Minute(Now), Second(Now))
+            Call PutToInI(JuanJuanRef(i).Name, "refDt", JuanJuanRef(i).refDt)
+        End If
+    
+    
+        For j = 0 To UBound(ListDetials, 2)
+            ListDetials(i, j).Name = JuanJuanRef(i).Name
+        Next
+    
     Next
-    
-    
+            
+    Timer1.Enabled = True
     
 End Function
 
-Private Function TimeRef()
+Public Function TimeRef()
     
+<<<<<<< HEAD
 On Error Resume Next
     Dim Errmsg  As String
+=======
+<<<<<<< HEAD
+    Dim i As Double
+    Dim j As Double
+    Dim k As Double
+    Dim seci As Double
+=======
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
     Dim i As Integer
     Dim j As Integer
-    Dim seci As Integer
+    Dim k
+    Dim seci
+>>>>>>> origin/master
+    
+    Dim SecDtj
+    Dim SecNow
+    Dim IntSecNowDivDtj
+    
     Dim Dtj As String
+<<<<<<< HEAD
     Dim Dtjold As String
     Dim DtNow As String
     Dim subSec As Double
+=======
+    
+    
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
     
     Errmsg = ""
     List2.Clear
+    If List1.ListCount = 0 Then
+        Exit Function
+    End If
+    
+    Timer1.Enabled = False
     
     j = UBound(JuanJuanRef)
     For i = 0 To j
         Err.Clear
         
         '把刷新间隔时间转成秒
-        seci = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
-        
-        '获取当前时间
-        DtNow = Format(Now, "YYYY/MM/DD HH:MM:SS")
-        
+        seci = TimeGetSeconds(JuanJuanRef(i).refDt)
         '上次刷新时间
         Dtj = JuanJuanRef(i).Dt
         
         '刷新时间不为零
         If seci > 0 Then
-            '获取时间差
+'            '获取时间差
+            SecDtj = TimeGetUTCSeconds(JuanJuanRef(i).Dt)
+            SecNow = TimeGetUTCSeconds(Now)
             
-            Dtjold = Dtj
-            subSec = DateDiff("s", Dtj, Now)
-            While subSec > 0
-                Dtjold = Dtj
-                Dtj = DateAdd("s", seci, Dtj)
-                subSec = DateDiff("s", Dtj, Now)
-                DoEvents
-            Wend
-            Call PutToInI(JuanJuanRef(i).name, "Dt", Dtjold)
+            IntSecNowDivDtj = Fix((SecNow - SecDtj) / seci)
+            
+            Dtj = DateAdd("s", IntSecNowDivDtj * seci, Dtj)
+            Call PutToInI(JuanJuanRef(i).Name, "Dt", Dtj)
         End If
+<<<<<<< HEAD
         
         List2.AddItem Format(Dtj, "YYYY/MM/DD HH:MM:SS") & " - " & JuanJuanRef(i).name
         If Err Then
@@ -245,6 +323,20 @@ On Error Resume Next
         MsgBox Errmsg + vbCrLf + vbCrLf + "修正参数后关闭程序重新运行", vbCritical + vbOKOnly
     End If
     
+=======
+        For k = 0 To UBound(ListDetials, 2)
+            ListDetials(i, k).NextDispTime = TimeFormat(DateAdd("s", k * seci, Dtj))
+            ListDetials(i, k).DispFlag = False
+            'List2.AddItem ListDetials(i, k).NextDispTime & " -    " & ListDetials(i, k).Name
+            DoEvents
+        Next
+        ListDetials(i, 0).DispFlag = True
+        DoEvents
+    Next
+    
+    Timer1.Enabled = True
+     
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
 End Function
 
 
@@ -252,6 +344,8 @@ End Function
 Private Sub Form_Unload(Cancel As Integer)
     End
 End Sub
+
+ 
 
 Private Sub List1_Click()
     Form2.txtText_name = List1.List(List1.ListIndex)
@@ -266,12 +360,90 @@ Private Sub List1_Click()
     If Form2.Visible = False Then
         Form2.Left = Me.Left + Me.Width + 200
         Form2.Top = Me.Top
-        Form2.Command1.Caption = "修改"
         Form2.Show
+    End If
+    Form2.Command1.Caption = "修改"
+End Sub
+ 
+
+
+Private Function GetShortestSeconds()
+    Dim i As Integer
+    Dim shortestSEC
+    Dim dtSec
+    shortestSEC = 2000
+    dtSec = 0
+    
+    
+    If Not List1.ListCount = 0 Then
+        For i = 0 To UBound(JuanJuanRef)
+            dtSec = TimeGetSeconds(JuanJuanRef(i).refDt)
+            If shortestSEC > dtSec Then
+                shortestSEC = dtSec
+            End If
+        Next
+    End If
+    
+    GetShortestSeconds = Format(shortestSEC / 60, "0.00")
+End Function
+
+Private Sub Timer1_Timer()
+    Dim i As Integer
+    Dim j As Integer
+    Label1.Caption = TimeFormat(Now) & " - 当前时间"
+    
+    If List1.ListCount = 0 Then
+        Exit Sub
+    End If
+    
+    Call refListDetials
+    
+    If NeedRefreshList2 = True Or List2.ListCount = 0 Then
+        List2.Clear
+        For i = 0 To UBound(ListDetials, 1)
+            For j = 0 To UBound(ListDetials, 2)
+                List2.AddItem ListDetials(i, j).NextDispTime & " - " & IIf(ListDetials(i, j).DispFlag = True, "√", "  ") & " " & ListDetials(i, j).Name
+            Next
+        Next
     End If
 End Sub
 
-Private Sub Timer1_Timer()
-    Label1.Caption = Format(Now, "YYYY/MM/DD HH:MM:SS") & " - 当前时间"
-    Call TimeRef
-End Sub
+Function refListDetials()
+    Dim i As Integer
+    Dim j As Integer
+    For i = 0 To UBound(ListDetials, 1)
+        While (DateDiff("s", ListDetials(i, 1).NextDispTime, Now) >= 0) And (TimeGetSeconds(JuanJuanRef(i).refDt) <> 0)
+            For j = 1 To UBound(ListDetials, 2)
+                ListDetials(i, j - 1) = ListDetials(i, j)
+                DoEvents
+            Next
+            ListDetials(i, UBound(ListDetials, 2)).NextDispTime = TimeFormat(DateAdd("s", TimeGetSeconds(JuanJuanRef(i).refDt), ListDetials(i, UBound(ListDetials, 2)).NextDispTime))
+            ListDetials(i, 0).DispFlag = True
+            NeedRefreshList2 = True
+            DoEvents
+        Wend
+        
+         If TimeGetSeconds(JuanJuanRef(i).refDt) = 0 Then
+             For j = 0 To UBound(ListDetials, 2)
+                If DateDiff("s", ListDetials(i, j).NextDispTime, Now) >= 0 Then
+                    ListDetials(i, j).DispFlag = True
+                End If
+                DoEvents
+            Next
+        End If
+        
+        DoEvents
+    Next
+End Function
+
+Function TimeGetUTCSeconds(time As String)
+    TimeGetUTCSeconds = DateDiff("s", "1970/01/01 00:00:00", time)
+End Function
+
+Function TimeFormat(time As String) As String
+    TimeFormat = Format(Trim$(time), "YYYY/MM/DD HH:MM:SS")
+End Function
+
+Function TimeGetSeconds(time As String) As Integer
+    TimeGetSeconds = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & time)
+End Function

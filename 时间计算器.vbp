@@ -2,7 +2,7 @@ Type=Exe
 Form=Form1.frm
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
 Form=Form2.frm
-Module=Module1; Module1.bas
+Module=ini; Module1.bas
 IconForm="Form1"
 Startup="Form1"
 HelpFile=""
@@ -15,7 +15,11 @@ Description="�εεصε�"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=0
+<<<<<<< HEAD
 RevisionVer=5
+=======
+RevisionVer=61
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionCompanyName="Yuht"
@@ -36,3 +40,6 @@ Retained=0
 ThreadPerObject=0
 MaxNumberOfThreads=1
 DebugStartupOption=0
+
+[CodeSMART]
+Task_UID=25_07_16_09_35_00

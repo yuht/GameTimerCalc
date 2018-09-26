@@ -4,7 +4,7 @@ Begin VB.Form Form2
    BackColor       =   &H80000005&
    BorderStyle     =   4  'Fixed ToolWindow
    Caption         =   "怪物和刷新时间管理"
-   ClientHeight    =   1380
+   ClientHeight    =   1050
    ClientLeft      =   45
    ClientTop       =   345
    ClientWidth     =   5265
@@ -12,10 +12,11 @@ Begin VB.Form Form2
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   1380
+   ScaleHeight     =   1050
    ScaleWidth      =   5265
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  '窗口缺省
+<<<<<<< HEAD
    Begin VB.CommandButton Command2 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
@@ -40,36 +41,40 @@ Begin VB.Form Form2
    Begin VB.CommandButton Command1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+=======
+   Begin VB.CommandButton Command1 
+      Appearance      =   0  'Flat
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
       Caption         =   "添加"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   375
       Left            =   4185
       Style           =   1  'Graphical
       TabIndex        =   8
-      Top             =   517
+      Top             =   570
       Width           =   990
    End
    Begin VB.TextBox txtText_name 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Left            =   1080
       TabIndex        =   0
       Top             =   60
@@ -79,76 +84,79 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   0
       Left            =   1080
       TabIndex        =   2
-      Text            =   "Text1"
-      Top             =   510
+      Text            =   "0"
+      Top             =   382
       Width           =   645
    End
    Begin VB.TextBox txtText2 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   1
       Left            =   2160
       TabIndex        =   3
-      Text            =   "Text1"
-      Top             =   510
+      Text            =   "0"
+      Top             =   382
       Width           =   645
    End
    Begin VB.TextBox txtText2 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   2
       Left            =   3105
       TabIndex        =   4
-      Text            =   "Text1"
-      Top             =   510
+      Text            =   "0"
+      Top             =   382
       Width           =   645
    End
    Begin VB.CommandButton cmd 
       Appearance      =   0  'Flat
+<<<<<<< HEAD
       BackColor       =   &H80000005&
+=======
+>>>>>>> 47e1e555c5bca79f46ab5508f1a6d1bfd0edf091
       Caption         =   "当前时间"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   375
       Left            =   4185
       Style           =   1  'Graphical
       TabIndex        =   1
@@ -159,58 +167,60 @@ Begin VB.Form Form2
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   3
       Left            =   1080
       TabIndex        =   5
-      Top             =   975
+      Text            =   "0"
+      Top             =   705
       Width           =   645
    End
    Begin VB.TextBox txtText2 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   4
       Left            =   2160
       TabIndex        =   6
-      Top             =   975
+      Text            =   "0"
+      Top             =   705
       Width           =   645
    End
    Begin VB.TextBox txtText2 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   285
       Index           =   5
       Left            =   3105
       TabIndex        =   7
       Text            =   "0"
-      Top             =   975
+      Top             =   705
       Width           =   645
    End
    Begin VB.Label lbl 
@@ -218,160 +228,160 @@ Begin VB.Form Form2
       BackStyle       =   0  'Transparent
       Caption         =   "怪物名称："
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   6
-      Left            =   45
-      TabIndex        =   17
-      Top             =   135
-      Width           =   1050
+      Left            =   60
+      TabIndex        =   16
+      Top             =   105
+      Width           =   900
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "刷怪时间："
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   0
-      Left            =   45
-      TabIndex        =   16
-      Top             =   585
-      Width           =   1050
+      Left            =   75
+      TabIndex        =   15
+      Top             =   427
+      Width           =   900
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "："
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   1
       Left            =   1845
-      TabIndex        =   15
-      Top             =   585
-      Width           =   210
+      TabIndex        =   14
+      Top             =   427
+      Width           =   180
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "："
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   2
       Left            =   2880
-      TabIndex        =   14
-      Top             =   585
-      Width           =   210
+      TabIndex        =   13
+      Top             =   427
+      Width           =   180
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "刷新间隔："
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   3
-      Left            =   45
-      TabIndex        =   13
-      Top             =   1050
-      Width           =   1050
+      Left            =   75
+      TabIndex        =   12
+      Top             =   750
+      Width           =   900
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "分"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   4
       Left            =   2880
-      TabIndex        =   12
-      Top             =   1050
-      Width           =   210
+      TabIndex        =   11
+      Top             =   750
+      Width           =   180
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "秒"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   5
       Left            =   3825
-      TabIndex        =   11
-      Top             =   1050
-      Width           =   210
+      TabIndex        =   10
+      Top             =   750
+      Width           =   180
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "小时"
       BeginProperty Font 
-         Name            =   "宋体"
-         Size            =   10.5
-         Charset         =   134
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   210
+      Height          =   195
       Index           =   9
       Left            =   1755
-      TabIndex        =   10
-      Top             =   1050
-      Width           =   420
+      TabIndex        =   9
+      Top             =   750
+      Width           =   360
    End
 End
 Attribute VB_Name = "Form2"
@@ -401,21 +411,20 @@ Private Sub Command1_Click()
     Next
     
     Dt = Date & " " & TimeSerial(txtText2(0), txtText2(1), txtText2(2))
+    Dt = Format(Dt, "YYYY/MM/DD HH:MM:SS")
     refDt = TimeSerial(txtText2(3), txtText2(4), txtText2(5))
     
 '    MsgBox txtText_name & vbCrLf & Date & " " & Dt & vbCrLf & refDt
-    
+    Call DelIniSec(Form1.List1.List(Form1.List1.ListIndex))
     Call PutToInI(txtText_name, "Dt", Dt)
     Call PutToInI(txtText_name, "refDt", refDt)
     
     Call Form1.refList
-    
+    Call Form1.TimeRef
     
 End Sub
 
-Private Sub Command2_Click()
-    Unload Me
-End Sub
+ 
 
 Private Sub Form_Load()
     ka = Date
