@@ -1,5 +1,7 @@
 VERSION 5.00
 Begin VB.Form Form1 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
    Caption         =   "刷怪时间计算器    by滴滴地滴滴  BiuBiu"
    ClientHeight    =   4215
    ClientLeft      =   120
@@ -21,6 +23,7 @@ Begin VB.Form Form1
    ScaleWidth      =   6540
    StartUpPosition =   3  '窗口缺省
    Begin VB.Frame Frame2 
+      BackColor       =   &H80000005&
       Caption         =   "刷怪时间"
       Height          =   4110
       Left            =   45
@@ -43,6 +46,7 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
          Caption         =   "当前时间："
          Height          =   195
          Left            =   90
@@ -52,6 +56,7 @@ Begin VB.Form Form1
       End
    End
    Begin VB.Frame Frame1 
+      BackColor       =   &H80000005&
       Caption         =   "怪物和刷新时间管理"
       Height          =   4110
       Left            =   3825
@@ -59,17 +64,23 @@ Begin VB.Form Form1
       Top             =   45
       Width           =   2670
       Begin VB.CommandButton Command3 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
          Caption         =   "删除"
          Height          =   870
          Left            =   2115
+         Style           =   1  'Graphical
          TabIndex        =   3
          Top             =   2070
          Width           =   465
       End
       Begin VB.CommandButton Command1 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
          Caption         =   "添加"
          Height          =   870
          Left            =   2115
+         Style           =   1  'Graphical
          TabIndex        =   2
          Top             =   855
          Width           =   465
@@ -178,18 +189,23 @@ End Function
 
 Private Function TimeRef()
     
+On Error Resume Next
+    Dim Errmsg  As String
     Dim i As Integer
     Dim j As Integer
     Dim seci As Integer
     Dim Dtj As String
     Dim Dtjold As String
     Dim DtNow As String
-    Dim subSec As Integer
+    Dim subSec As Double
     
+    Errmsg = ""
     List2.Clear
     
     j = UBound(JuanJuanRef)
     For i = 0 To j
+        Err.Clear
+        
         '把刷新间隔时间转成秒
         seci = DateDiff("s", "1970/01/01 00:00:00", "1970/01/01 " & JuanJuanRef(i).refDt)
         
@@ -215,8 +231,19 @@ Private Function TimeRef()
         End If
         
         List2.AddItem Format(Dtj, "YYYY/MM/DD HH:MM:SS") & " - " & JuanJuanRef(i).name
+        If Err Then
+            If Len(Errmsg) Then
+                Errmsg = Errmsg + vbCrLf + vbCrLf
+            End If
+            Errmsg = Errmsg + "怪物名称：" + JuanJuanRef(i).name + vbCrLf + "刷怪时间：" + JuanJuanRef(i).Dt + vbCrLf + "刷新间隔：" + JuanJuanRef(i).refDt
+        End If
         DoEvents
     Next
+    
+    If Err Then
+        Timer1.Enabled = False
+        MsgBox Errmsg + vbCrLf + vbCrLf + "修正参数后关闭程序重新运行", vbCritical + vbOKOnly
+    End If
     
 End Function
 

@@ -1,5 +1,7 @@
 VERSION 5.00
 Begin VB.Form Form2 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
    BorderStyle     =   4  'Fixed ToolWindow
    Caption         =   "怪物和刷新时间管理"
    ClientHeight    =   1380
@@ -15,6 +17,8 @@ Begin VB.Form Form2
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  '窗口缺省
    Begin VB.CommandButton Command2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
       Caption         =   "关闭"
       Default         =   -1  'True
       BeginProperty Font 
@@ -28,11 +32,14 @@ Begin VB.Form Form2
       EndProperty
       Height          =   315
       Left            =   4185
+      Style           =   1  'Graphical
       TabIndex        =   9
       Top             =   945
       Width           =   990
    End
    Begin VB.CommandButton Command1 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
       Caption         =   "添加"
       BeginProperty Font 
          Name            =   "宋体"
@@ -45,6 +52,7 @@ Begin VB.Form Form2
       EndProperty
       Height          =   315
       Left            =   4185
+      Style           =   1  'Graphical
       TabIndex        =   8
       Top             =   517
       Width           =   990
@@ -128,6 +136,8 @@ Begin VB.Form Form2
       Width           =   645
    End
    Begin VB.CommandButton cmd 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
       Caption         =   "当前时间"
       BeginProperty Font 
          Name            =   "宋体"
@@ -140,6 +150,7 @@ Begin VB.Form Form2
       EndProperty
       Height          =   315
       Left            =   4185
+      Style           =   1  'Graphical
       TabIndex        =   1
       Top             =   90
       Width           =   990
